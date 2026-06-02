@@ -1,0 +1,50 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Info producto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+
+    <!-- Materialize CSS: https://materializecss.github.io -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <a href="/" class="btn-large waves-effect waves-light orange">
+            <i class="large material-icons">home</i>
+            Volver
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col s6 m3" th:each="producto : ${productos}">
+            <div class="card green lighten-5">
+                <div class="card-content black-text">
+                    <span class="card-title" th:text="${producto.cod}"></span>
+                    <h3 th:text="${producto.nombre}"></h3>
+                    <p class="orange-text" th:text="${producto.fabricante}"></p>
+                    <p class="grey-text" th:text="${producto.descripcion}"></p>
+                    <a class="btn-floating btn-large halfway-fab waves-effect waves-light orange" th:text="${producto.unidades}"></a>
+                </div>
+                <div class="card-action">
+                    <h4 th:text="${producto.precio} + ' €'"></h4>
+                    <form method="post" th:action="@{/producto/delete}" th:object="${producto}">
+                        <input type="hidden" th:field="*{cod}" />
+                        <button type="submit" class="btn-small waves-effect waves-light red">
+                            <i class="material-icons">delete</i> Eliminar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Materialize JS -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+</body>
+</html>

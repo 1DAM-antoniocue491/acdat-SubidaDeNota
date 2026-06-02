@@ -1,0 +1,29 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Info usuario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+
+    <!-- Materialize CSS: https://materializecss.github.io -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+</head>
+<body>
+<div class="row center">
+    <div class="col s12">
+        <div class="card orange lighten-5">
+            <div class="card-content black-text">
+                <span class="card-title">[[${user.nombreUsuario}]]</span> <!-- Opción alternativa sin uso de th:text -->
+                <p>Bienvenido [[${user.nombreCompleto}]]</p>
+                <p>[[${user.role}]]</p>
+                <a class="btn-floating btn-large halfway-fab waves-effect waves-light orange"><i class="material-icons">person</i></a>
+            </div>
+            <div class="card-action">
+                <a href="#" target="_blank" th:text="${user.email}"></a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

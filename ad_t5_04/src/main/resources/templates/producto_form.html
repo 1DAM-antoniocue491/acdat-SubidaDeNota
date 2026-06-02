@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+
+    <!-- Materialize CSS: https://materializecss.github.io -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
+</head>
+<body>
+
+<div class="container">
+    <h1 class="center">Registro de producto</h1>
+
+    <form method="post" th:action="@{/producto/add}" th:object="${producto}">
+
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">settings</i>
+                <label for="codigo">Código producto</label>
+                <input type="text" id="codigo" th:field="*{cod}"/>
+                <div class="red-text" th:errors="*{cod}"></div> <!-- Atributo th:errors para control de validación -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">local_grocery_store</i>
+                <label for="nombre">Nombre de producto</label>
+                <input type="text" id="nombre" th:field="*{nombre}"/>
+                <div class="red-text" th:errors="*{nombre}"></div>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">message</i>
+                <label for="fabricante">Fabricante</label>
+                <input type="text" id="fabricante" th:field="*{fabricante}"/>
+                <div class="red-text" th:errors="*{fabricante}"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">info</i>
+                <label for="descripcion">Descripción</label>
+                <textarea id="descripcion" th:field="*{descripcion}" class="materialize-textarea" required="required" style="height: 100px;"></textarea>
+                <div class="red-text" th:errors="*{descripcion}"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="range-field col s6">
+                <i class="material-icons prefix">autorenew</i>
+                <label for="unidades">Stock</label>
+                <input type="range" id="unidades" min="0" max="1000" th:field="*{unidades}" value="0" />
+                <div class="red-text" th:errors="*{unidades}"></div>
+            </div>
+
+            <div class="input-field col s6">
+                <i class="material-icons prefix">attach_money</i>
+                <label for="precio">Precio unidad</label>
+                <input type="number" id="precio" th:field="*{precio}" value="0" step="0.01"/>
+                <div class="red-text" th:errors="*{precio}"></div>
+            </div>
+        </div>
+
+        <div class="row center">
+            <div class="input-field col s12">
+                <button type="submit" class="btn btn-default waves-effect waves-light">Registrar producto</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Materialize JS: https://materializecss.github.io -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
+</body>
+</html>

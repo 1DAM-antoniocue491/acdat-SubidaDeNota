@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Alumnos y Productos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
+</head>
+<body>
+
+<div class="container">
+    <h1 class="center">Gestión de Alumnos y Productos</h1>
+
+    <div class="row center">
+        <a href="/producto/catalogo" class="btn-large waves-effect waves-light purple">
+            <i class="material-icons left">inventory</i>
+            Ver Catálogo de Productos
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col s12 m6" th:each="usuario : ${usuarios}">
+            <div class="card blue lighten-5">
+                <div class="card-content">
+                    <span class="card-title blue-text">
+                        <i class="material-icons left">person</i>
+                        <span th:text="${usuario.nombreCompleto}"></span>
+                    </span>
+                    <p class="grey-text"><strong>Usuario:</strong> <span th:text="${usuario.nombreUsuario}"></span></p>
+                    <p class="grey-text"><strong>Email:</strong> <span th:text="${usuario.email}"></span></p>
+                    <p class="grey-text"><strong>Productos asignados:</strong> <span th:text="${#lists.size(usuario.productos)}"></span></p>
+                </div>
+                <div class="card-action">
+                    <a th:href="@{/alumno/{nombre}/productos(nombre=${usuario.nombreUsuario})}"
+                       class="btn waves-effect waves-light orange">
+                        <i class="material-icons left">shopping_cart</i>
+                        Ver Productos
+                    </a>
+                    <a th:href="@{/producto/asignar/{nombre}(nombre=${usuario.nombreUsuario})}"
+                       class="btn waves-effect waves-light green">
+                        <i class="material-icons left">add</i>
+                        Asignar Producto
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/materialize.min.js}"></script>
+</body>
+</html>
