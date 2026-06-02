@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos del Alumno</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <a href="/" class="btn-large waves-effect waves-light orange">
+            <i class="large material-icons">home</i>
+            Volver
+        </a>
+    </div>
+
+    <h2 class="center blue-text">
+        Productos de <span th:text="${alumno.nombreCompleto}"></span>
+    </h2>
+
+    <div class="row" th:if="${#lists.isEmpty(alumno.productos)}">
+        <div class="col s12">
+            <div class="card yellow lighten-4">
+                <div class="card-content">
+                    <p class="center black-text">Este alumno no tiene productos registrados.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" th:unless="${#lists.isEmpty(alumno.productos)}">
+        <div class="col s12 m6 l4" th:each="producto : ${alumno.productos}">
+            <div class="card green lighten-5">
+                <div class="card-content">
+                    <span class="card-title" th:text="${producto.cod}"></span>
+                    <h5 th:text="${producto.nombre}"></h5>
+                    <p class="orange-text" th:text="${producto.fabricante}"></p>
+                    <p class="grey-text" th:text="${producto.descripcion}"></p>
+                </div>
+                <div class="card-action">
+                    <h6 th:text="${producto.precio} + ' €'"></h6>
+                    <p>Stock: <span th:text="${producto.unidades}"></span></p>
+                    <form method="post" th:action="@{/producto/desasignar/{nombre}(nombre=${alumno.nombreUsuario})}" class="inline">
+                        <input type="hidden" name="cod" th:value="${producto.cod}" />
+                        <button type="submit" class="btn-small waves-effect waves-light red">
+                            <i class="material-icons">delete</i> Desasignar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed-action-btn">
+        <a th:href="@{/producto/asignar/{nombre}(nombre=${alumno.nombreUsuario})}"
+           class="btn-floating btn-large waves-effect waves-light green pulse">
+            <i class="large material-icons">add</i>
+        </a>
+    </div>
+</div>
+
+<script th:src="@{/js/materialize.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Error</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+
+    <!-- Materialize CSS: https://materializecss.github.io -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+</head>
+<body class="center-align">
+
+<h1 class="header">
+    <i class="large material-icons red-text">error</i>
+</h1>
+<div class="row">
+    <h5 class="header col s12" th:text="${msg}"></h5>
+</div>
+<div class="row">
+    <a href="/" class="btn-large waves-effect waves-light orange">
+        <i class="large material-icons">home</i>
+        Volver
+    </a>
+</div>
+</div>
+
+</body>
+</html>
