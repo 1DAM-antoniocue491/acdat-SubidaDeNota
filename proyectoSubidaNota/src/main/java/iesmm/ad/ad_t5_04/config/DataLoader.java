@@ -1,4 +1,4 @@
-﻿package iesmm.ad.ad_t5_04.config;
+package iesmm.ad.ad_t5_04.config;
 
 import iesmm.ad.ad_t5_04.model.Empleado;
 import iesmm.ad.ad_t5_04.repository.EmpleadoRepository;
@@ -16,11 +16,11 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Empleado empleado1 = new Empleado(null, "Juan Pérez", "juan.perez@example.com");
-        Empleado empleado2 = new Empleado(null, "María García", "maria.garcia@example.com");
-        Empleado empleado3 = new Empleado(null, "Carlos López", "carlos.lopez@example.com");
-        Empleado empleado4 = new Empleado(null, "Ana Martínez", "ana.martinez@example.com");
-        Empleado empleado5 = new Empleado(null, "David Rodríguez", "david.rodriguez@example.com");
+        Empleado empleado1 = new Empleado(null, "Juan Perez", "juan.perez@example.com");
+        Empleado empleado2 = new Empleado(null, "Maria Garcia", "maria.garcia@example.com");
+        Empleado empleado3 = new Empleado(null, "Carlos Lopez", "carlos.lopez@example.com");
+        Empleado empleado4 = new Empleado(null, "Ana Martinez", "ana.martinez@example.com");
+        Empleado empleado5 = new Empleado(null, "David Rodriguez", "david.rodriguez@example.com");
 
         empleadoRepository.save(empleado1);
         empleadoRepository.save(empleado2);
@@ -28,6 +28,6 @@ public class DataLoader implements CommandLineRunner {
         empleadoRepository.save(empleado4);
         empleadoRepository.save(empleado5);
 
-        System.out.println("✓ Datos de prueba cargados: 5 empleados creados correctamente");
+        System.out.println("Datos de prueba cargados: 5 empleados creados correctamente");
     }
 }
