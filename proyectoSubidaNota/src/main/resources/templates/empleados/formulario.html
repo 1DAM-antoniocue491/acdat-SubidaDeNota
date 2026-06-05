@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${modoEdicion} ? 'Editar Empleado' : 'Nuevo Empleado'"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <a href="/empleados" class="btn-large waves-effect waves-light orange">
+            <i class="large material-icons">home</i>
+            Volver
+        </a>
+    </div>
+
+    <h2 class="center blue-text" th:text="${modoEdicion} ? 'Editar Empleado' : 'Nuevo Empleado'"></h2>
+
+    <div class="row">
+        <form th:action="@{/empleados/guardar}" th:object="${empleado}" method="post" class="col s12">
+
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" th:field="*{nombre}"
+                           th:classappend="${#fields.hasErrors('nombre')} ? 'invalid' : ''" />
+                    <label for="nombre">Nombre</label>
+                    <span class="red-text" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="email" th:field="*{email}"
+                           th:classappend="${#fields.hasErrors('email')} ? 'invalid' : ''" />
+                    <label for="email">Email</label>
+                    <span class="red-text" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+            </div>
+
+            <div class="row center">
+                <button type="submit" class="btn-large waves-effect waves-light green">
+                    <i class="material-icons left">check</i>
+                    Guardar
+                </button>
+                <a href="/empleados" class="btn-large waves-effect waves-light grey">
+                    <i class="material-icons left">cancel</i>
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script th:src="@{/js/materialize.min.js}"></script>
+</body>
+</html>
