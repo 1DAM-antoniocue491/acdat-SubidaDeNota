@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - Alumnos y Productos</title>
+    <title>Dashboard - Gestión de Tareas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
@@ -10,38 +10,90 @@
 <body>
 
 <div class="container">
-    <h1 class="center">Gestión de Alumnos y Productos</h1>
+    <h1 class="center blue-text">Sistema de Gestión de Tareas y Empleados</h1>
+    <p class="center grey-text">Aplicación desarrollada con Spring Boot + Thymeleaf + JPA</p>
 
-    <div class="row center">
-        <a href="/producto/catalogo" class="btn-large waves-effect waves-light purple">
-            <i class="material-icons left">inventory</i>
-            Ver Catálogo de Productos
+    <div class="row center" style="margin-top: 50px;">
+        <a href="/empleados/" class="btn-large waves-effect waves-light blue">
+            <i class="material-icons left">people</i>
+            Gestionar Empleados
+        </a>
+        <a href="/tareas/" class="btn-large waves-effect waves-light green">
+            <i class="material-icons left">task</i>
+            Gestionar Tareas
         </a>
     </div>
 
-    <div class="row">
-        <div class="col s12 m6" th:each="usuario : ${usuarios}">
+    <div class="row" style="margin-top: 50px;">
+        <div class="col s12 m6">
             <div class="card blue lighten-5">
                 <div class="card-content">
-                    <span class="card-title blue-text">
-                        <i class="material-icons left">person</i>
-                        <span th:text="${usuario.nombreCompleto}"></span>
+                    <span class="card-title blue-text center">
+                        <i class="material-icons">people</i>
+                        Empleados
                     </span>
-                    <p class="grey-text"><strong>Usuario:</strong> <span th:text="${usuario.nombreUsuario}"></span></p>
-                    <p class="grey-text"><strong>Email:</strong> <span th:text="${usuario.email}"></span></p>
-                    <p class="grey-text"><strong>Productos asignados:</strong> <span th:text="${#lists.size(usuario.productos)}"></span></p>
+                    <p class="center grey-text">Administra el personal de tu empresa</p>
+                    <ul class="left-align" style="margin-top: 20px;">
+                        <li><i class="material-icons tiny green-text">check</i> Crear nuevos empleados</li>
+                        <li><i class="material-icons tiny green-text">check</i> Editar información</li>
+                        <li><i class="material-icons tiny green-text">check</i> Eliminar empleados</li>
+                        <li><i class="material-icons tiny green-text">check</i> Asignar tareas</li>
+                    </ul>
                 </div>
-                <div class="card-action">
-                    <a th:href="@{/alumno/{nombre}/productos(nombre=${usuario.nombreUsuario})}"
-                       class="btn waves-effect waves-light orange">
-                        <i class="material-icons left">shopping_cart</i>
-                        Ver Productos
+                <div class="card-action center">
+                    <a href="/empleados/" class="btn waves-effect waves-light blue">
+                        Ir a Empleados
                     </a>
-                    <a th:href="@{/producto/asignar/{nombre}(nombre=${usuario.nombreUsuario})}"
-                       class="btn waves-effect waves-light green">
-                        <i class="material-icons left">add</i>
-                        Asignar Producto
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m6">
+            <div class="card green lighten-5">
+                <div class="card-content">
+                    <span class="card-title green-text center">
+                        <i class="material-icons">task</i>
+                        Tareas
+                    </span>
+                    <p class="center grey-text">Gestiona las tareas del equipo</p>
+                    <ul class="left-align" style="margin-top: 20px;">
+                        <li><i class="material-icons tiny green-text">check</i> Crear nuevas tareas</li>
+                        <li><i class="material-icons tiny green-text">check</i> Asignar a empleados</li>
+                        <li><i class="material-icons tiny green-text">check</i> Cambiar estado</li>
+                        <li><i class="material-icons tiny green-text">check</i> Seguir progreso</li>
+                    </ul>
+                </div>
+                <div class="card-action center">
+                    <a href="/tareas/" class="btn waves-effect waves-light green">
+                        Ir a Tareas
                     </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row center" style="margin-top: 30px;">
+        <div class="col s12">
+            <div class="card orange lighten-5">
+                <div class="card-content">
+                    <span class="card-title orange-text">
+                        <i class="material-icons left">info</i>
+                        Estados de Tareas
+                    </span>
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col s4">
+                            <span class="badge orange" style="font-size: 14px;">PENDIENTE</span>
+                            <p class="grey-text small">Tarea sin comenzar</p>
+                        </div>
+                        <div class="col s4">
+                            <span class="badge blue" style="font-size: 14px;">EN_PROCESO</span>
+                            <p class="grey-text small">Tarea en ejecución</p>
+                        </div>
+                        <div class="col s4">
+                            <span class="badge green" style="font-size: 14px;">FINALIZADA</span>
+                            <p class="grey-text small">Tarea completada</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

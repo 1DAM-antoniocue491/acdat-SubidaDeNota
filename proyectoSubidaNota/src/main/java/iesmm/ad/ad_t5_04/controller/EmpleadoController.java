@@ -1,4 +1,4 @@
-﻿package iesmm.ad.ad_t5_04.controller;
+package iesmm.ad.ad_t5_04.controller;
 
 import iesmm.ad.ad_t5_04.model.Empleado;
 import iesmm.ad.ad_t5_04.repository.EmpleadoRepository;
@@ -29,6 +29,7 @@ public class EmpleadoController {
     @GetMapping("/")
     public String listarEmpleados(Model m) {
         m.addAttribute("empleados", empleadoRepository.findAll());
+        log.info("Entra en empleados");
         return "empleados/lista";
     }
 
@@ -61,13 +62,13 @@ public class EmpleadoController {
 
         empleadoRepository.save(empleado);
         log.info("Empleado guardado: " + empleado.getNombre() + " (id: " + empleado.getId() + ")");
-        return "redirect:/empleados";
+        return "redirect:/empleados/";
     }
 
     @PostMapping("/eliminar/{id}")
     public String eliminarEmpleado(@PathVariable Long id) {
         empleadoRepository.deleteById(id);
         log.info("Empleado eliminado con id: " + id);
-        return "redirect:/empleados";
+        return "redirect:/empleados/";
     }
 }

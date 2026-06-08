@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Empleados</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
+</head>
+<body>
+
+<div class="container">
+    <h2 class="center blue-text">Gestión de Empleados</h2>
+
+    <div class="row center">
+        <a href="/" class="btn-large waves-effect waves-light orange">
+            <i class="material-icons left">home</i>
+            Volver al Dashboard
+        </a>
+        <a href="/empleados/nuevo" class="btn-large waves-effect waves-light green">
+            <i class="material-icons left">add</i>
+            Nuevo Empleado
+        </a>
+    </div>
+
+    <div class="row" th:if="${#lists.isEmpty(empleados)}">
+        <div class="col s12">
+            <div class="card yellow lighten-4">
+                <div class="card-content">
+                    <p class="center black-text">No hay empleados registrados.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" th:unless="${#lists.isEmpty(empleados)}">
+        <table class="striped hoverable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="empleado : ${empleados}">
+                    <td th:text="${empleado.id}"></td>
+                    <td th:text="${empleado.nombre}"></td>
+                    <td th:text="${empleado.email}"></td>
+                    <td>
+                        <a th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
+                           class="btn-small waves-effect waves-light blue">
+                            <i class="material-icons left">edit</i>
+                            Editar
+                        </a>
+                        <form th:action="@{/empleados/eliminar/{id}(id=${empleado.id})}"
+                              method="post"
+                              style="display: inline;"
+                              onsubmit="return confirm('¿Estás seguro de eliminar este empleado?')">
+                            <button type="submit" class="btn-small waves-effect waves-light red">
+                                <i class="material-icons left">delete</i>
+                                Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script th:src="@{/js/materialize.min.js}"></script>
+</body>
+</html>

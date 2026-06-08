@@ -1,6 +1,11 @@
-C:\Users\usuario\Desktop\acdat-SubidaDeNota\prueba\src\main\java\iesmm\ad\ad_t5_04\AdT504Application.java
-C:\Users\usuario\Desktop\acdat-SubidaDeNota\prueba\src\main\java\iesmm\ad\ad_t5_04\controller\ErrorsController.java
-C:\Users\usuario\Desktop\acdat-SubidaDeNota\prueba\src\main\java\iesmm\ad\ad_t5_04\controller\ProductController.java
-C:\Users\usuario\Desktop\acdat-SubidaDeNota\prueba\src\main\java\iesmm\ad\ad_t5_04\controller\UserController.java
-C:\Users\usuario\Desktop\acdat-SubidaDeNota\prueba\src\main\java\iesmm\ad\ad_t5_04\model\Producto.java
-C:\Users\usuario\Desktop\acdat-SubidaDeNota\prueba\src\main\java\iesmm\ad\ad_t5_04\model\Usuario.java
+C:\Users\usuario\Desktop\acdat-SubidaDeNota\proyectoSubidaNota\src\main\java\iesmm\ad\ad_t5_04\AdT504Application.java
+C:\Users\usuario\Desktop\acdat-SubidaDeNota\proyectoSubidaNota\src\main\java\iesmm\ad\ad_t5_04\config\DataLoader.java
+C:\Users\usuario\Desktop\acdat-SubidaDeNota\proyectoSubidaNota\src\main\java\iesmm\ad\ad_t5_04\controller\EmpleadoController.java
+C:\Users\usuario\Desktop\acdat-SubidaDeNota\proyectoSubidaNota\src\main\java\iesmm\ad\ad_t5_04\controller\ErrorsController.java
+C:\Users\usuario\Desktop\acdat-SubidaDeNota\proyectoSubidaNota\src\main\java\iesmm\ad\ad_t5_04\controller\TareaController.java
+C:\Users\usuario\Desktop\acdat-SubidaDeNota\proyectoSubidaNota\src\main\java\iesmm\ad\ad_t5_04\controller\UserController.java
+C:\Users\usuario\Desktop\acdat-SubidaDeNota\proyectoSubidaNota\src\main\java\iesmm\ad\ad_t5_04\model\Empleado.java
+C:\Users\usuario\Desktop\acdat-SubidaDeNota\proyectoSubidaNota\src\main\java\iesmm\ad\ad_t5_04\model\EstadoTarea.java
+C:\Users\usuario\Desktop\acdat-SubidaDeNota\proyectoSubidaNota\src\main\java\iesmm\ad\ad_t5_04\model\Tarea.java
+C:\Users\usuario\Desktop\acdat-SubidaDeNota\proyectoSubidaNota\src\main\java\iesmm\ad\ad_t5_04\repository\EmpleadoRepository.java
+C:\Users\usuario\Desktop\acdat-SubidaDeNota\proyectoSubidaNota\src\main\java\iesmm\ad\ad_t5_04\repository\TareaRepository.java

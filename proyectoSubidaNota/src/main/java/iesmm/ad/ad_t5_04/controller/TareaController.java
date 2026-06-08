@@ -82,14 +82,14 @@ public class TareaController {
 
         tareaRepository.save(tarea);
         log.info("Tarea guardada: " + tarea.getTitulo() + " (id: " + tarea.getId() + ")");
-        return "redirect:/tareas";
+        return "redirect:/tareas/";
     }
 
     @PostMapping("/eliminar/{id}")
     public String eliminarTarea(@PathVariable Long id) {
         tareaRepository.deleteById(id);
         log.info("Tarea eliminada con id: " + id);
-        return "redirect:/tareas";
+        return "redirect:/tareas/";
     }
 
     @PostMapping("/{id}/cambiar-estado")
@@ -106,6 +106,6 @@ public class TareaController {
             log.warning("Estado inválido: " + nuevoEstado);
         }
 
-        return "redirect:/tareas";
+        return "redirect:/tareas/";
     }
 }

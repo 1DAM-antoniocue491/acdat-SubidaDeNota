@@ -37,18 +37,15 @@ public class Empleado {
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tarea> tareas = new ArrayList<>();
 
-    // Constructor vacío
     public Empleado() {
     }
 
-    // Constructor completo
     public Empleado(Long id, String nombre, String email) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
     }
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -81,7 +78,6 @@ public class Empleado {
         this.tareas = tareas;
     }
 
-    // equals() y hashCode() usando solo id
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,7 +91,6 @@ public class Empleado {
         return Objects.hashCode(id);
     }
 
-    // toString() sin las tareas para evitar bucles infinitos
     @Override
     public String toString() {
         return "Empleado{" +
