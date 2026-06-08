@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -28,7 +29,12 @@ public class EmpleadoController {
 
     @GetMapping("/")
     public String listarEmpleados(Model m) {
-        m.addAttribute("empleados", empleadoRepository.findAll());
+        List<Empleado> empleados = empleadoRepository.findAll();
+        // Inicializar las tareas de cada empleado (relación LAZY)
+        for (Empleado empleado : empleados) {
+            empleado.getTareas().size();
+        }
+        m.addAttribute("empleados", empleados);
         log.info("Entra en empleados");
         return "empleados/lista";
     }

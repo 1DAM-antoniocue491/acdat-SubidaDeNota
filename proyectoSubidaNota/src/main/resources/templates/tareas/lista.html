@@ -23,6 +23,60 @@
         </a>
     </div>
 
+    <!-- Filtros -->
+    <div class="row" style="margin-top: 30px;">
+        <div class="col s12 m6">
+            <h5 class="grey-text text-darken-2">Filtrar por Estado</h5>
+            <div class="row">
+                <a href="/tareas/"
+                   class="btn waves-effect waves-light grey lighten-1"
+                   th:classappend="${filtroEstado == null} ? 'orange' : ''">
+                    Todas
+                </a>
+                <a href="/tareas/pendientes"
+                   class="btn waves-effect waves-light orange lighten-2"
+                   th:classappend="${filtroEstado == 'PENDIENTE'} ? 'orange darken-2' : ''">
+                    Pendientes
+                </a>
+                <a href="/tareas/en-proceso"
+                   class="btn waves-effect waves-light blue lighten-2"
+                   th:classappend="${filtroEstado == 'EN_PROCESO'} ? 'blue darken-2' : ''">
+                    En Proceso
+                </a>
+                <a href="/tareas/finalizadas"
+                   class="btn waves-effect waves-light green lighten-2"
+                   th:classappend="${filtroEstado == 'FINALIZADA'} ? 'green darken-2' : ''">
+                    Finalizadas
+                </a>
+            </div>
+        </div>
+
+        <div class="col s12 m6">
+            <h5 class="grey-text text-darken-2">Filtrar por Empleado</h5>
+            <form th:action="@{/tareas/}" method="get">
+                <select name="empleadoId" class="browser-default" onchange="this.form.submit()">
+                    <option value="">Todos los empleados</option>
+                    <option th:each="empleado : ${empleados}"
+                            th:value="${empleado.id}"
+                            th:text="${empleado.nombre}"
+                            th:selected="${filtroEmpleadoId != null and filtroEmpleadoId == empleado.id}">
+                    </option>
+                </select>
+            </form>
+            <div th:if="${empleado != null}" class="card orange lighten-5">
+                <div class="card-content">
+                    <span class="card-title orange-text">
+                        <i class="material-icons left">person</i>
+                        <span th:text="${empleado.nombre}"></span>
+                    </span>
+                    <p class="grey-text">
+                        Mostrando <strong th:text="${#lists.size(tareas)}"></strong> tarea(s)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row" th:if="${#lists.isEmpty(tareas)}">
         <div class="col s12">
             <div class="card yellow lighten-4">

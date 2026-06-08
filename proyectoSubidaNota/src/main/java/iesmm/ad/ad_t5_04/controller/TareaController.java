@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -33,8 +34,74 @@ public class TareaController {
     }
 
     @GetMapping("/")
-    public String listarTareas(Model m) {
-        m.addAttribute("tareas", tareaRepository.findAll());
+    public String listarTareas(
+            @RequestParam(value = "estado", required = false) String estado,
+            @RequestParam(value = "empleadoId", required = false) Long empleadoId,
+            Model m) {
+
+        List<Tarea> tareas;
+
+        // Filtrar por estado si se proporciona
+        if (estado != null && !estado.isEmpty()) {
+            try {
+                EstadoTarea estadoTarea = EstadoTarea.valueOf(estado.toUpperCase());
+                tareas = tareaRepository.findByEstado(estadoTarea);
+            } catch (IllegalArgumentException e) {
+                tareas = tareaRepository.findAll();
+            }
+        } else if (empleadoId != null) {
+            // Filtrar por empleado si se proporciona
+            tareas = tareaRepository.findByEmpleadoId(empleadoId);
+        } else {
+            // Sin filtros: todas las tareas
+            tareas = tareaRepository.findAll();
+        }
+
+        m.addAttribute("tareas", tareas);
+        m.addAttribute("empleados", empleadoRepository.findAll());
+        m.addAttribute("estados", EstadoTarea.values());
+        m.addAttribute("filtroEstado", estado);
+        m.addAttribute("filtroEmpleadoId", empleadoId);
+
+        return "tareas/lista";
+    }
+
+    @GetMapping("/pendientes")
+    public String tareasPendientes(Model m) {
+        m.addAttribute("tareas", tareaRepository.findByEstado(EstadoTarea.PENDIENTE));
+        m.addAttribute("empleados", empleadoRepository.findAll());
+        m.addAttribute("estados", EstadoTarea.values());
+        m.addAttribute("filtroEstado", "PENDIENTE");
+        return "tareas/lista";
+    }
+
+    @GetMapping("/en-proceso")
+    public String tareasEnProceso(Model m) {
+        m.addAttribute("tareas", tareaRepository.findByEstado(EstadoTarea.EN_PROCESO));
+        m.addAttribute("empleados", empleadoRepository.findAll());
+        m.addAttribute("estados", EstadoTarea.values());
+        m.addAttribute("filtroEstado", "EN_PROCESO");
+        return "tareas/lista";
+    }
+
+    @GetMapping("/finalizadas")
+    public String tareasFinalizadas(Model m) {
+        m.addAttribute("tareas", tareaRepository.findByEstado(EstadoTarea.FINALIZADA));
+        m.addAttribute("empleados", empleadoRepository.findAll());
+        m.addAttribute("estados", EstadoTarea.values());
+        m.addAttribute("filtroEstado", "FINALIZADA");
+        return "tareas/lista";
+    }
+
+    @GetMapping("/empleado/{empleadoId}")
+    public String tareasPorEmpleado(@PathVariable Long empleadoId, Model m) {
+        Empleado empleado = empleadoRepository.findById(empleadoId)
+                .orElseThrow(() -> new IllegalArgumentException("Empleado no encontrado con id: " + empleadoId));
+        m.addAttribute("tareas", tareaRepository.findByEmpleadoId(empleadoId));
+        m.addAttribute("empleado", empleado);
+        m.addAttribute("empleados", empleadoRepository.findAll());
+        m.addAttribute("estados", EstadoTarea.values());
+        m.addAttribute("filtroEmpleadoId", empleadoId);
         return "tareas/lista";
     }
 

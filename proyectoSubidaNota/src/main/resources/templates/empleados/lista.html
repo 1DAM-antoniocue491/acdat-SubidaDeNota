@@ -40,6 +40,7 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Email</th>
+                    <th>Tareas Asignadas</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -48,6 +49,15 @@
                     <td th:text="${empleado.id}"></td>
                     <td th:text="${empleado.nombre}"></td>
                     <td th:text="${empleado.email}"></td>
+                    <td>
+                        <span class="badge blue" th:text="${#lists.size(empleado.tareas)}"></span>
+                        <a th:href="@{/tareas/empleado/{id}(id=${empleado.id})}"
+                           class="btn-small waves-effect waves-light orange"
+                           style="margin-left: 10px;">
+                            <i class="material-icons left">visibility</i>
+                            Ver Tareas
+                        </a>
+                    </td>
                     <td>
                         <a th:href="@{/empleados/editar/{id}(id=${empleado.id})}"
                            class="btn-small waves-effect waves-light blue">
