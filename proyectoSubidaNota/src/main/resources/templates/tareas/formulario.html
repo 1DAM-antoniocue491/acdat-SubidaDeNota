@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${modoEdicion} ? 'Editar Tarea' : 'Nueva Tarea'"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <a href="/tareas" class="btn-large waves-effect waves-light orange">
+            <i class="large material-icons">home</i>
+            Volver
+        </a>
+    </div>
+
+    <h2 class="center blue-text" th:text="${modoEdicion} ? 'Editar Tarea' : 'Nueva Tarea'"></h2>
+
+    <div class="row">
+        <form th:action="@{/tareas/guardar}" th:object="${tarea}" method="post" class="col s12">
+
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" th:field="*{titulo}"
+                           th:classappend="${#fields.hasErrors('titulo')} ? 'invalid' : ''" />
+                    <label for="titulo">Título</label>
+                    <span class="red-text" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea th:field="*{descripcion}" class="materialize-textarea"></textarea>
+                    <label for="descripcion">Descripción</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <select th:field="*{estado}" class="browser-default">
+                        <option value="" disabled>Seleccione estado</option>
+                        <option th:each="estado : ${estados}"
+                                th:value="${estado.name()}"
+                                th:text="${estado}"
+                                th:selected="${tarea.estado != null and tarea.estado.name() == estado.name()}">
+                        </option>
+                    </select>
+                    <label>Estado</label>
+                </div>
+
+                <div class="input-field col s6">
+                    <select th:field="*{empleado.id}" class="browser-default">
+                        <option value="" disabled>Seleccione empleado</option>
+                        <option th:each="empleado : ${empleados}"
+                                th:value="${empleado.id}"
+                                th:text="${empleado.nombre}"
+                                th:selected="${tarea.empleado != null and tarea.empleado.id == empleado.id}">
+                        </option>
+                    </select>
+                    <label>Asignar a Empleado</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    <input type="datetime-local" th:field="*{fechaInicio}" />
+                    <label for="fechaInicio">Fecha y Hora de Inicio</label>
+                </div>
+                <div class="input-field col s6">
+                    <input type="datetime-local" th:field="*{fechaFin}" />
+                    <label for="fechaFin">Fecha y Hora de Fin</label>
+                </div>
+            </div>
+
+            <div class="row center">
+                <button type="submit" class="btn-large waves-effect waves-light green">
+                    <i class="material-icons left">check</i>
+                    Guardar
+                </button>
+                <a href="/tareas" class="btn-large waves-effect waves-light grey">
+                    <i class="material-icons left">cancel</i>
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script th:src="@{/js/materialize.min.js}"></script>
+<script>
+    // Inicializar select de Materialize
+    document.addEventListener('DOMContentLoaded', function() {
+        var selects = document.querySelectorAll('select');
+        // M.FormSelect.init(selects, {});
+    });
+</script>
+</body>
+</html>
